@@ -20,6 +20,7 @@ const app = express();
 dotenv.config();
 mongoose.connect(process.env.MONGO_URL, () => {});
 const jsonParser = bodyParser.json();
+mongoose.set("strictQuery", true);
 
 //socket for online users
 
