@@ -18,7 +18,7 @@ const test = require("./routes/index");
 
 const app = express();
 dotenv.config();
-mongoose.connect(process.env.MONGO_URL, () => {});
+mongoose.connect(process.env.MONGO_URL);
 const jsonParser = bodyParser.json();
 mongoose.set("strictQuery", true);
 
