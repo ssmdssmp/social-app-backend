@@ -8,11 +8,11 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const bodyParser = require("body-parser");
-const index = require("./routes/index");
+const socket = require("./routes/socket");
 const socketIo = require("socket.io");
 const PORT = process.env.PORT || 8800;
 const SOCKET_PORT = process.env.PORT || 8801;
-const test = require("./routes/index");
+const test = require("./routes/socket");
 
 // init
 
@@ -81,7 +81,7 @@ app.set("etag", false);
 
 // api
 
-app.use(index);
+app.use(socket);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
