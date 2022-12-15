@@ -45,10 +45,14 @@ router.put("/:id", async (req, res) => {
       }
     }
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-      });
-      res.status(200).json("account has been updated");
+      const user = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(200).json(user);
     } catch (err) {
       return res.status(500).json(err);
     }
@@ -60,8 +64,8 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   if (req.body.userId == req.params.id || req.body.isAdmin) {
     try {
-      await User.findByIdAndDelete(req.params.id);
-      res.status(200).json("account has been deleted");
+      const user = await User.findByIdAndDelete(req.params.id);
+      res.status(200).json(user._id);
     } catch (err) {
       return res.status(500).json(err);
     }
