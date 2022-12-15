@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
-    });
+    }).select("-password -isAdmin");
     !user && res.status(404).send("user not found");
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
       .sort("-_id -createdAt")
       .limit(5);
     const data = {
-      user: other,
+      user: user,
       userPosts: userPosts,
       followers: followers,
       followings: followings,
