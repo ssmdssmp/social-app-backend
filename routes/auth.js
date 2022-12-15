@@ -7,7 +7,7 @@ router.post("/registration", async (req, res) => {
   try {
     if (
       (await User.find().where("username").in(req.body.username)) ||
-      User.find().wherer("email").in(req.body.email)
+      User.find().where("email").in(req.body.email)
     ) {
       res.status(400).json("this user is already exist");
     } else {
