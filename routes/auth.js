@@ -49,10 +49,7 @@ router.post("/login", async (req, res) => {
     );
     !validPassword && res.status(400).send("wrong password");
 
-    const userPosts = await Post.find()
-      .where("userId")
-      .in(user._id)
-      .select("-password -isAdmin -updatedAt");
+    const userPosts = await Post.find().where("userId").in(user._id);
     const followers = await User.find()
       .where("_id")
       .in(user.followers)
