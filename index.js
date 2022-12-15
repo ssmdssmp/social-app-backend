@@ -13,7 +13,7 @@ const socketIo = require("socket.io");
 const PORT = process.env.PORT || 8800;
 const SOCKET_PORT = process.env.PORT || 8801;
 const test = require("./routes/socket");
-
+const cors = require("cors");
 // init
 
 const app = express();
@@ -78,6 +78,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 app.use(jsonParser);
+app.use(cors());
 app.set("etag", false);
 
 // api
