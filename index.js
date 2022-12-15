@@ -18,9 +18,8 @@ const test = require("./routes/socket");
 
 const app = express();
 dotenv.config();
-mongoose.connect(process.env.MONGO_URL, (res) => {
-  console.log(res);
-});
+mongoose.connect(process.env.MONGO_URL);
+
 const jsonParser = bodyParser.json();
 mongoose.set("strictQuery", true);
 if (process.env.NODE_ENV === "production") {
@@ -33,10 +32,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
 //socket for online users
 
-const http = require("http").createServer(app).use(connect.static(+"/public"));
+const http = require("http").createServer(app);
 const io = socketIo(http, {
   transports: ["websocket"],
   cors: {
