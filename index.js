@@ -29,7 +29,7 @@ const http = require("http").createServer(app);
 const io = socketIo(http, {
   transports: ["websocket"],
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://ssmdssmp.github.io/social-app",
     credentials: true,
     methods: ["GET", "POST"],
   },
@@ -84,9 +84,9 @@ app.set("etag", false);
 // api
 
 app.use(socket);
-app.use("/api/users", userRoute);
-app.use("/api/auth", authRoute);
-app.use("/api/posts", postRoute);
+// app.use("/api/users", userRoute);
+// app.use("/api/auth", authRoute);
+// app.use("/api/posts", postRoute);
 
 // listeners
 
