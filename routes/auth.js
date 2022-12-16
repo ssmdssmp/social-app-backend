@@ -13,7 +13,7 @@ router.post("/registration", async (req, res) => {
     })
       .where("email username")
       .in(req.body.email, req.body.username);
-    if (!checkUserEmail && !checkUserEmail) {
+    if (!checkUserEmail && !checkUsername) {
       //generate new password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
