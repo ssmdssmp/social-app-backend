@@ -5,10 +5,15 @@ const bcrypt = require("bcrypt");
 
 router.post("/registration", async (req, res) => {
   try {
-    const checkUser = await User.find()
+    const checkUserEmail = await User.findOne({
+      email: req.body.email,
+    });
+    const checkUsername = await User.findOne({
+      username: req.body.username,
+    })
       .where("email username")
       .in(req.body.email, req.body.username);
-    if (!checkUser) {
+    if (!checkUserEmail && !checkUserEmail) {
       //generate new password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
