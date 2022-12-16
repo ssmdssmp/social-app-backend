@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
       .in([...user.followers, user._id])
       .sort("-_id -createdAt")
       .limit(5);
-    const { password, isAdmin, ...other } = user;
+    const { password, isAdmin, ...other } = user._doc;
     const data = {
       user: other,
       userPosts: userPosts,
