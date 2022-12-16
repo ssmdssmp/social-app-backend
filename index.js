@@ -90,5 +90,5 @@ app.use("/api/posts", postRoute);
 
 // listeners
 
-app.listen(PORT, () => console.log("app working"));
-// http.listen(SOCKET_PORT, () => console.log("websocket working"));
+// app.listen(PORT, () => console.log("app working"));
+http.listen(SOCKET_PORT, () => console.log("websocket working"));
