@@ -5,12 +5,10 @@ const bcrypt = require("bcrypt");
 
 router.post("/registration", async (req, res) => {
   try {
-    if (
-      (await User.find().where("username").in(req.body.username)) ||
-      User.find().where("email").in(req.body.email)
-    ) {
-      res.status(400).json("this user is already exist");
-    } else {
+    const checkUser = await User.find()
+      .where("email username")
+      .in(req.body.email, req.body.username);
+    if (!checkUser) {
       //generate new password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -26,9 +24,12 @@ router.post("/registration", async (req, res) => {
         city: req.body.city,
         relationship: req.body.relationship,
       });
+
       // save user
       const user = await newUser.save();
       res.redirect(307, "login/");
+    } else {
+      res.status(400).json("this user is already exist");
     }
   } catch (err) {
     console.log(err);
